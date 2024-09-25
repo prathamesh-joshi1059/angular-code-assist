@@ -26,7 +26,6 @@ import { LoaderInterceptor } from './shared/Services/loader.interceptor';
 import { PlaceholderModule } from './features/add-placeholder/placeholder.module';
 import { ToastrModule } from 'ngx-toastr';
 
-
 @NgModule({
     imports: [
         BrowserModule,
