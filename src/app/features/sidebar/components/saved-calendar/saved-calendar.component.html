@@ -1,0 +1,76 @@
+<div fxLayout="column">
+  <div fxLayout="row wrap" fxFlex="100">
+    <mat-form-field appearance="outline" class="dense-2 pl-2 pr-2 pt-2 no-error" fxFlex="100">
+      <mat-select [(value)]="selectedView" [placeholder]="calendarName"
+        (selectionChange)="onSelectionChange($event.value)">
+        @for(view of customViews;track view){
+
+            <mat-option
+              #matOptionRef
+              [value]="view"
+              fxLayout="row"
+            >
+              <span>{{ view.calendarName }}</span>
+              <button 
+              class="iconsStyles"
+              (click)="
+                updateCalendar(view, 'favourite',$event); 
+              "
+            >
+              <img
+               
+                [src]="
+                  view.isFavorite
+                    ? 'assets/icons/star-filled.svg'
+                    :(matOptionRef.selected)?
+                    'assets/icons/star-outlined-white.svg'
+                    : 'assets/icons/star-outlined.svg'
+                "
+              />
+            </button>
+            </mat-option>
+            
+            
+        }
+      </mat-select>
+      <img matPrefix class="ml-2 mr-1" src="assets/icons/prefix.svg" />
+    </mat-form-field>
+
+    @if(addNewCalendarToggle){
+    <app-add-new-calendar></app-add-new-calendar>
+    }
+    @else{
+    <div matSuffix class="p-2 mr-1" fxFlex="100">
+      <div fxLayout="row wrap" style="max-height: 20px" fxFlex="80">
+        <mat-basic-chip class="small-chip" *ngFor="let branch of selectedView?.branches" [removable]="false"
+          class="p-1">
+          {{ branch }}
+        </mat-basic-chip>
+      </div>
+
+      <div fxLayout="row" fxFlex="20" style="height: fit-content">
+        <button [matTooltip]="isPinFilled ? 'Default Calendar' : 'Pin Calendar'" class="btn mr-1"
+          >
+          <span>
+            @if(isPinFilled){<img src="assets/icons/pin-filled.svg" />}
+            @else {<img src="assets/icons/pin-outlined.svg" 
+            (click)="updateCalendar(selectedView, 'pin', $event)"/>}
+          </span>
+        </button>
+        <button class="btn" id="addBtn" (click)="add()" matTooltip="Add Calendar">
+          <img src="assets/icons/plus.svg" />
+
+        </button>
+      </div>
+    </div>
+
+    <div class="p-2" fxLayoutAlign="end" style="position: relative" fxFlex="100">
+      <button mat-stroked-button color="primary" id="placeholderBtn" (click)="togglePlaceholder()">
+        <mat-icon matPrefix>dashboard</mat-icon>
+        Add Placeholder
+      </button>
+    </div>
+    }
+  </div>
+</div>
+

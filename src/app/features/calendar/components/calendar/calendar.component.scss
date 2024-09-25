@@ -1,0 +1,194 @@
+/* Calendar view */
+.calendar-content {
+  border-radius: 10px;
+  max-height: 100vh;
+}
+
+/* order initials */
+.initial {
+  width: max-content;
+  padding: 0px 4px;
+  color: white;
+}
+
+/* Multiday Orders  */
+.custom-event-multiDay {
+  display: inline-flex;
+  border-radius: 3px;
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid white;
+}
+
+/* Single day orders */
+.custom-event-container {
+  display: inline-flex;
+  border-radius: 3px;
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid white;
+}
+
+/* Calendar component */
+::ng-deep.fc {
+  /* Header */
+  .fc-toolbar.fc-header-toolbar {
+    margin: 0;
+    text-transform: capitalize;
+  }
+
+  /* Header Title */
+  .fc-toolbar-title {
+    font-size: 1rem;
+    text-transform: uppercase !important;
+    font-family: "Roboto", sans-serif;
+    color: #00539b;
+  }
+
+  /* Header buttons */
+  .fc-button-group > .fc-button.fc-button-active {
+    color: #00539b;
+    border: none !important;
+  }
+  .fc-button-group > .fc-button.fc-button-active:hover {
+    background-color: #00539b !important;
+    border: none !important;
+    color: rgb(243, 234, 234);
+    font-weight: 600;
+  }
+
+  .fc-button-primary {
+    margin: 0.25rem;
+    background-color: aliceblue !important;
+    border: none !important;
+    color: gray;
+    font-weight: 600;
+  }
+
+  .fc-button-primary:hover {
+    background-color: #00539b !important;
+    border: none !important;
+    color: rgb(243, 234, 234);
+    font-weight: 600;
+  }
+
+  .fc-button:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Day Number */
+  .fc-daygrid-day-number {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 13.2px;
+    color: #00539b;
+    background: transparent;
+    margin-right: 2px;
+    cursor: pointer;
+  }
+
+  .fc-day-today .fc-daygrid-day-number {
+    box-shadow: 1px 1px 1px 1px #d3d5e0;
+    border-radius: 3px;
+  }
+
+  .fc-daygrid-day-bg {
+    display: none !important;
+    background-color: #ffff !important;
+  }
+
+  .fc-daygrid-day-number:hover {
+    text-decoration: underline;
+    font-size: 16px;
+    box-shadow: 1px 1px 1px 1px #d3d5e0;
+    border-radius: 3px;
+  }
+
+  /* Orders conatiner */
+  .event-title {
+    font-weight: 600;
+  }
+
+  .event-dates {
+    font-style: italic;
+  }
+
+  .fc-daygrid-event {
+    display: block !important;
+    background: none;
+    border: none;
+  }
+
+  /* More Link */
+  .fc-daygrid-more-link {
+    color: blue !important;
+    float: left !important;
+    bottom: 0;
+  }
+
+  /* Past/inactive day */
+  .fc-day-past .fc-daygrid-day-number {
+    opacity: 0.5;
+  }
+
+  .fc-day-other .fc-daygrid-day-number {
+    opacity: 1 !important;
+    color: #00539b;
+  }
+
+  //PopOver
+  .fc-popover {
+    position: absolute;
+    max-height:90vh;
+    min-height: 90vh;
+    max-width: 20vw;
+    overflow: scroll;
+    scrollbar-width: none;
+    top:5px !important;
+    right: 0 !important;
+    left:calc(100% - 20vw) !important;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 3px 3px #c0c1c5;
+  }
+
+  .fc-popover-header {
+    position: sticky;
+    background-color: #0f80e2;
+    padding: 10px;
+    color: #ffff
+  }
+
+  .fc-popover-body {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  
+
+}
+
+:host ::ng-deep .fc-scrollgrid-sync-table > tr:first-child ::before {
+  position: absolute;
+  content: "click";
+  height: 30px;
+  // width: 10px;
+  bottom: 2px;
+  left: 2px;
+}
+
+.event-header {
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* Week view orders block */
+.extra-details {
+  margin-top: 0px;
+  padding: 4px;
+  width: 100%;
+  text-wrap: wrap;
+}

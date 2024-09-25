@@ -1,0 +1,177 @@
+<div fxLayout="column">
+  <form [formGroup]="filterForm">
+    <div fxFlex="100" fxLayout="column">
+      <div fxFlex="100" class="p-2" fxLayoutAlign="space-between center">
+        <h3 style="color: #00366e">Filters</h3>
+        <button mat-button (click)="formReset()" style="
+            border: 1px solid rgba(128, 128, 128, 0.4);
+            color: #00539b;
+            height: fit-content;
+            font-size: 11px;
+          ">
+          <div class="p-1" fxLayout="row" fxLayoutAlign="center center">
+            <p>Clear Filters</p>
+            <img src="assets/icons/clear-filters.svg" alt="clear" class="pl-1">
+          </div>
+        </button>
+      </div>
+
+      <mat-form-field appearance="outline" class="dense-2 p-2 custom-mat-form-field" fxFlex="100">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search" formControlName="search" (keypress)="handleKeyPress($event)"
+          (input)="update()" />
+        <mat-icon matPrefix color="primary" style="padding: 0 2px">search</mat-icon>
+      </mat-form-field>
+
+      <!----Project Type-->
+      <mat-form-field appearance="outline" class="dense-2 p-2 mt-1" fxFlex="100">
+        <mat-label class="ml-3">Project Types</mat-label>
+        <mat-select class="select-input" formControlName="projectTypes" multiple (selectionChange)="update()">
+          @for(projectype of projectType;track projectype){
+          <mat-option [value]="projectype.toLowerCase()">
+            {{ projectype }}
+          </mat-option>
+          }
+        </mat-select>
+        <img matPrefix class="ml-2 mr-1" src="assets/icons/prefix.svg" />
+      </mat-form-field>
+
+      @if(filterForm.value.projectTypes){
+      <div matSuffix class="pr-2 pl-2" fxLayoutAlign="space-between">
+        <div fxLayout="row wrap">
+          @for(projectype of
+          (filterForm.value.projectTypes)?filterForm.value.projectTypes:[]
+          ;track projectype){
+
+          <mat-basic-chip style="display: inline-flex;" [removable]="true" class="p-1" fxLayoutAlign="space-evenly">
+            <p class="pr-1">{{ projectype |titlecase}}</p>
+            <p class="pr-1">{{countsObj.projectTypes[this.titleCase(projectype)] || 0}}</p>
+            <img src="assets/icons/cancel.svg" [attr.aria-label]="'Remove ' + projectype"
+              (click)="remove(projectype, 'projectTypes')" />
+          </mat-basic-chip>
+          }
+        </div>
+      </div>
+      }
+
+      <!------WorkTypes-->
+      <mat-form-field appearance="outline" class="dense-2 p-2 mt-1" fxFlex="100">
+        <mat-label class="ml-3">Work Types</mat-label>
+
+        <mat-select class="select-input" formControlName="workTypes" multiple (selectionChange)="update()">
+          @for(worktype of workType;track worktype){
+          <mat-option [value]="worktype.workType.toLowerCase()">
+            {{ getWorkTypeName( worktype.workType) | titlecase}}
+          </mat-option>
+          }
+        </mat-select>
+        <img matPrefix class="ml-2 mr-1" src="assets/icons/prefix.svg" />
+      </mat-form-field>
+
+      @if(filterForm.value.workTypes){
+      <div matSuffix class="pl-2 pr-2">
+        <div fxLayout="row wrap" fxLayoutAlign="start center">
+          @for(worktype of
+          (filterForm.value.workTypes)?filterForm.value.workTypes:[];track
+          worktype){
+          <div class="mat-mdc-chip work-chip" fxLayoutAlign="center space-evenly">
+            <p>{{ worktype | uppercase}}</p>
+            <div class="bagde ml-1  mr-1" [style.background-color]="getWorkTypeColor(worktype)">
+              <p class="">{{countsObj.workTypes[worktype.toUpperCase()] || 0}}</p>
+            </div>
+            <img src="assets/icons/cancel-dark.svg" [attr.aria-label]="'Remove ' + worktype"
+              (click)="remove(worktype, 'workTypes')" />
+          </div>
+
+          }
+        </div>
+      </div>
+      }
+
+      <!------FenceType-->
+      <mat-form-field appearance="outline" class="dense-2 p-2 mt-1" fxFlex="100">
+        <mat-label class="ml-3">Fence Types</mat-label>
+
+        <mat-select class="select-input" formControlName="fenceTypes" multiple (selectionChange)="update()">
+          @for(fencetype of fenceType;track fencetype){
+          <mat-option [value]="fencetype.toLowerCase()">
+            {{ fencetype }}
+          </mat-option>
+          }
+        </mat-select>
+
+        <img matPrefix class="pl-2 pr-2" src="assets/icons/prefix.svg" />
+      </mat-form-field>
+
+      @if(filterForm.value.fenceTypes){
+      <div matSuffix class="pl-2 pr-2">
+        <div fxLayout="row wrap">
+          @for(fencetype of
+          (filterForm.value.fenceTypes)?filterForm.value.fenceTypes:[];track
+          fencetype){
+
+          <mat-basic-chip class="small-chip" [removable]="true" class="p-1">
+            <p class="pr-1">{{ fencetype | titlecase}}</p>
+            <!-- <p class="pr-1">3</p> -->
+            <img src="assets/icons/cancel.svg" (click)="remove(fencetype, 'fenceTypes')" />
+          </mat-basic-chip>
+          }
+        </div>
+      </div>
+      }
+
+
+      <!----Drivers-->
+      <mat-form-field appearance="outline" class="dense-2 p-2 mt-1" fxFlex="100">
+        <mat-label class="ml-3">Drivers</mat-label>
+
+        <mat-select class="select-input" formControlName="drivers" multiple (selectionChange)="update()">
+          @for(drivers of driversData;track drivers){
+          <mat-option [value]="drivers.toLowerCase()">
+            {{ drivers | titlecase }}
+          </mat-option>
+          }
+        </mat-select>
+
+        <img matPrefix class="ml-2 mr-1" src="assets/icons/prefix.svg" />
+      </mat-form-field>
+
+      @if(filterForm.value.drivers){
+      <div matSuffix class="pl-2 pr-2" fxFlex="100">
+        <div fxLayout="row wrap">
+          @for(driver of
+          (filterForm.value.drivers)?filterForm.value.drivers:[];track driver){
+
+          <mat-basic-chip class="small-chip" [removable]="true" class="p-1">
+            <p class="pr-1">{{ driver | titlecase}}</p>
+            <p class="pr-1">{{getDriverOrderCount(driver)}}</p>
+            <img matSuffix src="assets/icons/cancel.svg" (click)="remove(driver, 'drivers')" />
+          </mat-basic-chip>
+          }
+        </div>
+      </div>
+
+      <mat-list>
+        @for (driver of (filterForm.value.drivers)?filterForm.value.drivers:[];
+        track driver) {
+        <mat-list-item>
+          <img matListItemIcon src="assets/img/avatars/truck-01.png" alt="truck" class="mr-2" />
+          <div matListItemTitle class="pl-0" fxLayout="row wrap" fxLayoutAlign="start center">
+            <p class="driver-title">{{ driver | titlecase }} :</p>
+            @for(wType of getDriverAllWorkType(driver);track wType){
+            <div>
+              <div class="bagde ml-1 mt-1" [style.background-color]="getWorkTypeColor(wType)">
+                <p class="">{{this.countsObj.driverWorkTypeCounts[this.titleCase(driver)][wType]}}</p>
+              </div>
+            </div>
+            }
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        }
+        <mat-divider></mat-divider>
+      </mat-list>
+      }
+    </div>
+  </form>
+</div>

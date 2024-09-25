@@ -1,0 +1,19 @@
+<mat-drawer-container class="page-wrapper">
+  <mat-drawer #sidenav [opened]="settings.sidenavIsOpened" [mode]="settings.sidenavIsPinned ? 'side' : 'over'"
+    class="sidenav mat-elevation-z8" autoFocus="false" [disableClose]="true">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+
+  <mat-drawer-content #mainContent class="main-content mat-elevation-z8">
+    <div class="main-content-inner pl-3">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+
+  <mat-drawer #placeholder position="end" class="options" style="z-index: 100;width:365px" (opened)="onDrawerToggle(true)" (closed)="onDrawerToggle(false)">
+    <div *ngIf="placeholder.opened">
+      <app-add-placeholder></app-add-placeholder>
+    </div>
+  </mat-drawer>
+
+</mat-drawer-container>

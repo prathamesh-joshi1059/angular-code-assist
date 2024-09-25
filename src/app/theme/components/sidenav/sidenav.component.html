@@ -1,0 +1,57 @@
+<div fxLayout="column" fxFlexFill>
+  <div style="display: flex; flex-direction: column; width: 100% !important">
+    <img src="assets\USS_Logo.png" alt="logo" style="max-width: 90%; margin: 0.5rem" class="p-2" />
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="p-2">
+      <button class="neumorphic-background" (click)="prevMonth()" *ngIf="route.url=='/calendar'">
+        <mat-icon color="primary" class="neumorphic-icon m-1">chevron_left</mat-icon>
+      </button>
+
+      <div class="month" fxFlex="60" fxLayoutAlign="center" (click)="returnMonth()" [style.cursor]="(route.url=='/calendar')?'default':'pointer'">
+        <span class="mat-primary roboto-500 monthLabel">{{ currentMonth | uppercase
+          }}</span>
+      </div>
+      
+      <button class="neumorphic-background" (click)="nextMonth()" *ngIf="route.url=='/calendar'">
+        <mat-icon color="primary" class="neumorphic-icon m-1">chevron_right</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <ng-scrollbar>
+    <div class="p-2">
+      @if(firstLogin && addNewCalendarToggle){
+      <app-add-new-calendar></app-add-new-calendar>
+      }
+      @else{
+      <app-saved-calendar></app-saved-calendar>
+      @if(!addNewCalendarToggle){
+      <mat-divider></mat-divider>
+      <app-filters></app-filters>
+      }
+      }
+    </div>
+  </ng-scrollbar>
+  <div class="p-2">
+    <mat-divider></mat-divider>
+    <div fxLayout="row" class="user-block">
+      <div fxFlex="100" class="m-2">
+        <!-- <img src="assets/img/avatars/avatar-9.png" alt="logo" class="circular-image mr-2" /> -->
+         <div fxFlex = "40" class = "user-initial roboto-500">
+          {{ userName | userInitial }}
+         </div>
+        <div fxFlex="60">
+          <h5 class="m-1 roboto-400" style="color: #344767; font-weight: 700">
+            {{ userName }}
+          </h5>
+          <p class="m-1 roboto-400" style="overflow: hidden; text-overflow: ellipsis">
+            {{ userMail }}
+
+          </p>
+        </div>
+        <button mat-icon-button (click)="logout()" matTooltip="Logout">
+          <mat-icon color="primary">exit_to_app</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

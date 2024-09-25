@@ -1,0 +1,196 @@
+
+<div fxLayout="column">
+  <div class="mb-2 topLabel">
+    <mat-icon color="primary">dashboard</mat-icon>
+    <span class="ml-2">
+    Add Placeholder
+  </span>
+  </div>
+
+
+  <form [formGroup]="addNewPlaceholder" class="px-3 py-2">
+
+
+    <div fxLayout="column" fxLayoutAlign="start">
+
+     
+        <div fxLayout="row wrap" fxFlex="100">
+          <input appCapitalizeFirstLetter class="roboto inputClientName" placeholder="Client's Name" formControlName="clientName"  [ngStyle]="{ 'border': (addNewPlaceholder.get('clientName')?.invalid && addNewPlaceholder.get('clientName')?.touched )? '1px solid rgba(244, 67, 54, 0.87)' : '' }">
+        </div>
+        <mat-divider class="mt-2"></mat-divider>
+        @if ((addNewPlaceholder.get('clientName')?.invalid && addNewPlaceholder.get('clientName')?.touched )) {
+          <div class="clientName" >
+            <div class="mat-mdc-form-field-subscript-wrapper">
+              <div class="mat-mdc-form-field-error-wrapper ">
+                <mat-error class="mat-mdc-form-field-error .mat-mdc-form-field-bottom-align" id="mat-mdc-error-0">Client name required</mat-error>
+              </div>  
+            </div>
+          </div>
+        }
+      
+        
+      </div>
+
+      
+      
+      
+      <!-- ProjectType field -->
+      <div class="project-type-container" fxLayout="row wrap"  >
+      <h3 class="project-type-header my-2" fxFlex="100">Project Type</h3>
+      <div class="project-type-content p-2" fxFlex="100" [ngStyle]="{ 'border': (addNewPlaceholder.get('projectType')?.invalid && addNewPlaceholder.get('projectType')?.touched )? '1px solid rgba(244, 67, 54, 0.87)' : '' }">
+        
+        <fieldset fxLayout="row wrap" fxFlex="100" >
+          <label class="m-1 mr-2 pType">
+            <input type="radio"   [value]="'Event'" formControlName="projectType"  />
+            <span class="pt-radio" ></span>
+            Event
+          </label>
+          <label class="m-1 mr-2 pType">
+            <input type="radio"    [value]="'Construction'" formControlName="projectType"   />
+            <span class="pt-radio" ></span>
+            Construction
+          </label>
+        </fieldset>
+      </div>
+    </div>
+
+
+
+    <div  class="my-2 project-type-container">
+      <h3 class="project-type-header my-2">Work Type</h3>
+      <div class="project-type-content p-2" fxLayout="row wrap" fxFlex="100"   [ngStyle]="{ 'border': (addNewPlaceholder.get('workType')?.invalid && addNewPlaceholder.get('workType')?.touched )? '1px solid rgba(244, 67, 54, 0.87)' : '' }">
+        @for(worktype of workTypes; track worktype){
+          <label class="checkBoxWrapper workType m-1 p-1">
+            <input type="radio"  [value]="worktype.workType"  (change)="onChange(worktype.workType)" formControlName="workType"  />
+            <span class="custom-radio" [ngStyle]="{'background-color': selectedValue === worktype.workType ? worktype.color : '','border-color': worktype.color}"></span>
+           {{worktype.workType}}
+          </label>
+        }
+      </div>
+    </div>
+
+    <div  class="header my-2">
+      <h3 class="project-type-header my-2">Fence Type</h3>
+      <section class="example-section" fxFlex="100">
+        <div class="project-type-content p-2" fxLayout="row wrap" fxFlex="100"   [ngStyle]="{ 'border': (isFenceTypeValid())? '1px solid rgba(244, 67, 54, 0.87)' : '' }">
+          @for (item of fenceTypeArr; track $index;) {
+            <div fxLayout="row" >
+              <span class="checkBoxWrapper p-1"><input class="mr-1" type="checkbox" [checked]="item.isChecked" (change)="changeCheckbox($event.target,$index)"/>{{item.fenceType}}
+            
+              <input appNumberOnly
+              [disabled]="!item.isChecked"
+              [value]="item.noOfUnits"
+              type="number"
+              (input)="changeUnits($event.target, $index)"
+              [ngStyle]="{
+                'display' : item.isChecked?'block': 'none'
+              }"  class="custom-noOfUnits p-1" [min]="1"  >
+              
+          </span>
+            </div>
+            }
+          </div>
+      </section>
+    </div>
+
+
+    <div  class="driverName">
+      <div>
+        <h3 class="project-type-header my-2">Driver Name</h3>
+      </div>  
+
+
+      <mat-form-field appearance="outline" class="dense-2 ">
+        <mat-label>Enter Driver Name</mat-label>
+        <input appCapitalizeFirstLetter type="text" matInput formControlName="driverName">
+      </mat-form-field>
+
+    </div>
+
+
+
+
+
+    <mat-calendar #calendar [(selected)]="selectedDateRange" (selectedChange)="rangeChanged($event)" [minDate]="todayDate" ></mat-calendar>
+
+    <div class="calendar my-2">
+      <div>
+        <h3 class="project-type-header my-2">Branches</h3>
+      </div>
+      <mat-form-field appearance="outline" class="dense-2">
+
+        <mat-label>Branch</mat-label>
+        <mat-select placeholder="Branch" formControlName="branch">
+          @for(branch of Branches; track $index ){
+          <mat-option [value]="branch">{{ branch }}</mat-option>
+          }
+        </mat-select>
+        <mat-error class="mat-mdc-form-field-error-wrapper " >Select Branch</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div  class="siteAddress my-2">
+      <div>
+        <h3 class="project-type-header ">Site Address</h3>
+      </div>
+
+
+      <mat-form-field appearance="outline">
+   
+        <textarea matInput placeholder="Enter Address" class="custom-input mat-mdc-text-field-wrapper" formControlName="siteAddress"></textarea>
+        <mat-error  class="mat-mdc-form-field-error-wrapper ">Adderss is required</mat-error>
+      </mat-form-field>
+      
+    </div>
+
+
+    <!-- Phone field -->
+      <mat-form-field appearance="outline" class="dense-2 w-100">
+        <mat-label>Phone Number</mat-label>
+        <input type="number" matInput formControlName="phone" maxlength="10" (keydown)="mobileNumberValidator($event)">
+      </mat-form-field>
+      
+    <div>
+      <mat-form-field appearance="outline" class="w-100 p-0">
+        <div class="add-notes-title px-0 mx-0">
+          Add notes...
+        </div>
+        <textarea matInput class="custom-input mat-mdc-text-field-wrapper"  formControlName="notes"></textarea>
+        @if (addNewPlaceholder.controls.notes.hasError('maxlength')) {
+
+        }
+        <mat-error class="mat-mdc-form-field-error-wrapper " >
+          Must be no more than 4000 characters.
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+
+
+  <!-- Save Button field -->
+
+  <div fxFlex="100" class="p-2 save-button"  fxLayout="row" fxLayoutAlign="space-between center " >
+    @if(orderData?.orderId){
+      <button mat-button  (click)="deletePlaceholder(orderData?orderData.orderId:'')"> <img src="assets/icons/trash.svg" > </button>
+    } @else{
+
+      <button
+      mat-flat-button
+      color="primary" (click)="resetForm()"
+       class="button-style cancel-button">
+      Clear
+    </button> 
+    }
+  
+    <button
+      mat-flat-button
+      color="primary" (click)="onSave()" 
+      class="button-style ">
+      {{orderData?.orderId? "Update": "Save"}}
+    </button>   
+  </div>
+
+
+
+

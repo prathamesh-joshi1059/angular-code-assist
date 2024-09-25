@@ -1,0 +1,21 @@
+@use "@angular/material" as mat;
+@import "./variables";
+$custom-typography: mat.define-typography-config($body-1: mat.define-typography-level(14px, 20px, 400, $main-font-family),
+        $button: mat.define-typography-level(14px,
+            22px,
+            600,
+            $main-font-family,
+            $letter-spacing: 0.02em),
+    );
+@include mat.all-component-typographies($custom-typography);
+@include mat.core();
+
+@import "theme-reset";
+
+.app {
+    &.uss-theme {
+        @import "skins/_foxtrot-theme";
+        @include mat.all-component-colors($foxtrot-theme);
+        @include theme-reset($foxtrot-theme);
+    }
+}

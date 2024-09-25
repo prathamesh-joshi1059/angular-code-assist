@@ -1,0 +1,31 @@
+@import "../../../../theme/styles/variables";
+
+.sidenav {
+  width: $sidenav-width;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.main-content {
+  max-height: 100vh;
+  overflow: auto !important;
+}
+.main-content-inner {
+  border-radius: 10px;
+}

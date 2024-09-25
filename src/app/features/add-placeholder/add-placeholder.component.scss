@@ -1,0 +1,247 @@
+.header{
+  display: flex;
+   flex-direction: column;
+}
+
+
+.demo-inline-calendar-card {
+  width: 300px;
+}
+
+///////Address
+.custom-item {
+  margin-left: 6px;
+}
+
+/////////////Project Type CSS/////////////////
+.project-type-header {
+  color: #4F5B80;
+}
+
+.project-type-content {
+  background: #F7F9FC !important;
+  border: 1px solid #C1C1C1;
+  border-radius: 5px !important;
+}
+
+
+.checkBox1 .mat-checkbox-frame {
+  border-color: #00539B !important;
+}
+
+.checkBoxWrapper {
+  background: white;
+  margin: 2px;
+  // padding: 2px 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color:  #E5E7EB;
+}
+
+.inputClientName{
+  border: none ;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: #344054 !important;
+  width: 100%;
+  border-radius: 4px;
+  
+}
+
+.inputClientName:focus{
+  border: none !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: #344054 !important;
+  outline: none !important;
+}
+
+.topLabel{
+  background: #edeff2;
+  color: #00539B;
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+
+// .custom-input .mat-input-element {
+   
+//   padding: 10px; 
+// }
+
+.mat-mdc-text-field-wrapper{
+  min-height: 100px !important;
+  max-height: 100px !important;
+  resize: none;
+}
+
+.add-notes-title {
+  border-bottom: 1px solid #000000de;
+  
+}
+
+
+
+////
+
+.workType >input[type="radio"] {
+  display: none;
+}
+
+.workType .custom-radio {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  border: 2px solid #ccc;
+  border-radius: 2px; /* Makes it square */
+  transition: background-color 0.3s ease;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+label span.custom-radio {
+  border-radius: 4px; /* Ensure it stays square */
+}
+
+
+.pType > input[type="radio"] {
+  display: none;
+}
+
+/* Create a custom radio button */
+.pt-radio {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border: 2px solid #00539B;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Style the inner circle (checked state) */
+.pt-radio::after {
+  content: '';
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: #00539B;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Show the inner circle when the radio button is checked */
+input[type="radio"]:checked + .pt-radio::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+fieldset{
+  border:none;
+}
+
+
+input::placeholder {
+  font-size: 18px; 
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+.save-button{
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  background-color: white;
+  border-top: 1px solid rgba($color: grey, $alpha: 0.5);
+}
+
+
+
+
+.custom-noOfUnits {
+  height: 20px;
+  width: 40px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  -moz-appearance: textfield;
+  margin-left: 2px;
+  background-color:  #F2F4F7;
+  text-align: right;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari */
+  margin: 0;
+}
+.custom-noOfUnits:focus{
+ outline: none;
+}
+
+input::-webkit-input-placeholder {
+  color: rgba($color: grey, $alpha: 0.5); /* Chrome, Safari, Opera */
+}
+
+::ng-deep .mat-calendar-header {
+  padding: 0 !important;
+}
+
+
+.button-style{
+  height: 30px;
+  width: 30px;
+
+}
+.cancel-button{
+background-color: #A0A0A0;
+color: white;
+}
+
+.mat-mdc-form-field-error-wrapper{
+  padding-left: 0 !important;
+}
+
+.project-type-container{
+  display: flex; 
+  flex-direction: column;
+}
+
+.clientName{
+  height: 1rem;
+}
+
+.driverName{
+  display: flex; 
+  flex-direction: column;
+}
+
+.calendar{
+  display: flex; flex-direction: column;
+}
+
+.siteAddress{
+  display: flex; flex-direction: column;
+}

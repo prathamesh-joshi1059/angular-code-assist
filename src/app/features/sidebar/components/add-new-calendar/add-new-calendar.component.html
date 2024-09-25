@@ -1,0 +1,93 @@
+<div fxLayout="column" fxFlex="100">
+  <form [formGroup]="addNewCalendarForm">
+    <div fxLayout="row wrap" fxFlex="100">
+      <!-- Region Field -->
+      <mat-button-toggle-group fxLayout="column" multiple formControlName="regions" (valueChange)="onRegionChange()"
+        [ngStyle]="{ 'border': (addNewCalendarForm.get('regions')?.invalid && addNewCalendarForm.get('regions')?.touched)? '1px solid rgba(244, 67, 54, 0.87)' : '' }"
+        fxFlex="100" class="m-2">
+        @for (region of Regions; track $index) {
+        <mat-button-toggle class="m-1" [value]="region" color="primary" #east>
+          {{ region }}
+        </mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+      @if((addNewCalendarForm.get('regions')?.invalid && addNewCalendarForm.get('regions')?.touched) ||
+      (addNewCalendarForm.get('areas')?.touched &&addNewCalendarForm.get('regions')?.invalid)){
+      <div fxFlex="100" style="height: 1rem;" class="pl-2 pr-2">
+        <div class="mat-mdc-form-field-subscript-wrapper">
+          <div class="mat-mdc-form-field-error-wrapper">
+            <mat-error class="mat-mdc-form-field-error .mat-mdc-form-field-bottom-align" id="mat-mdc-error-0">Select
+              Region</mat-error>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Area Field -->
+      <mat-form-field appearance="outline" class="dense-2 pr-2 pl-2 pt-2" fxFlex="100">
+        <mat-label>Area</mat-label>
+        <mat-select formControlName="areas" placeholder="Area" multiple (selectionChange)="onAreaChange()">
+          @for(area of Areas; track $index){
+          <mat-option [value]="area">{{ area }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>Select Area</mat-error>
+      </mat-form-field>
+
+      <!-- Branch Field -->
+      <mat-form-field appearance="outline" class="dense-2 pr-2 pl-2" fxFlex="100">
+        <mat-label>Branch</mat-label>
+        <mat-select placeholder="Branch" formControlName="branches" multiple>
+          @for(branch of Branches; track $index ){
+          <mat-option [value]="branch.branchId">{{ branch.branchName }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>Select Branch</mat-error>
+      </mat-form-field>
+
+      <div class="pl-2 pr-2 pb-3" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between">
+        <div fxFlex="70">
+          <b style="color: #00539b; font-family: 'Inter', sans-serif">Save As...</b>
+        </div>
+        <div fxLayoutAlign="end end" fxFlex="30">
+          <button class="iconsStyles" style="margin-right: 4px; border: none" (click)="isPinFilled = !isPinFilled">
+            @if(isPinFilled){
+            <span><img src="assets/icons/pin-filled.svg" /></span>
+            }@else {
+            <span><img src="assets/icons/pin-outlined.svg" /></span>
+            }
+          </button>
+
+          <button class="iconsStyles" (click)="isStarFilled = !isStarFilled" style="border: none">@if(isStarFilled){
+            <img style="padding-bottom: 1px;" src="assets/icons/star-filled.svg" />
+            }@else {
+            <img style="padding-bottom: 1px;" src="assets/icons/star-outlined.svg" />
+            }
+          </button>
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline" class="dense-2 pl-2 pr-2" fxFlex="100">
+        <mat-label>Calendar Name</mat-label>
+        <input type="text" matInput placeholder="Calendar Name" formControlName="calendarName"
+          appCapitalizeFirstLetter />
+        <mat-error>Calendar name required</mat-error>
+      </mat-form-field>
+
+      @if(isFirstLogin){
+      <div fxFlex="100" class="pl-2 pr-2 pb-3" fxLayoutAlign="end center">
+        <button mat-flat-button color="primary" class="button-style" (click)="saveCalendar()">
+          Apply
+        </button>
+      </div>
+      }@else {
+      <div fxFlex="100" class="pl-2 pr-2 pb-3" fxLayoutAlign="space-between center">
+        <button mat-flat-button class="button-style cancel-button" (click)="close()">Close</button>
+        <button mat-flat-button class="button-style" color="primary" (click)="saveCalendar()">
+          Apply
+        </button>
+      </div>
+      }
+    </div>
+  </form>
+</div>

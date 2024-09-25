@@ -1,0 +1,177 @@
+.custom-card {
+    width: 500px;
+    max-width: 95%;
+    height: auto;
+    margin-left: 5px;
+
+}
+
+
+.mat-form-field {
+    margin-bottom: 15px;
+}
+
+.mat-input-element {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.mat-input-element:focus {
+    border-color: #999;
+}
+
+
+.mat-select {
+    min-width: 200px;
+}
+
+
+
+.mat-select-arrow {
+    color: #999;
+}
+
+
+.custom-button {
+    background-color: #00539B !important;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-as-label {
+    color: #00539B !important;
+
+}
+
+.fill_star {
+    color: #f1d140;
+}
+
+.iconsStyles {
+    background: transparent;
+    border: 1px solid rgba($color: grey, $alpha: 0.2);
+    border-radius: 5px;
+    margin-right: 4px;
+     border: none;
+     transition: all ease-in 0.5s;
+}
+
+::ng-deep .mat-button-toggle-button {
+    border: 0;
+    background: none;
+    color: inherit;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    height: 25px;
+    text-align: left;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+////////
+.no-border {
+    border: none !important;
+}
+
+.mat-button-toggle-checked {
+    background-color: #00539B !important;
+    color: white !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 4px;
+}
+
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-label-content {
+    display: flex !important;
+    align-items: center !important;
+    // flex-direction: row-reverse !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+}
+
+    ::ng-deep.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
+        color: white !important;
+    }
+
+
+    .mat-button-toggle-checked .mat-button-toggle-label-content {
+        justify-content: space-between !important;
+      }
+
+.mat-button-toggle-group-appearance-standard .mat-button-toggle-appearance-standard+.mat-button-toggle-appearance-standard {
+    border-left: none !important;
+}
+.mat-mdc-form-field-subscript-wrapper{
+    display: block;
+}
+
+.button-style{
+    height: 30px;
+    width: 30px;
+}
+.cancel-button{
+background-color: #A0A0A0;
+color: white;
+}
+
+.scale-in-ver-center {
+    -webkit-animation: scale-in-ver-center 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: scale-in-ver-center 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+
+@-webkit-keyframes scale-in-ver-center {
+    0% {
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-in-ver-center {
+    0% {
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+::ng-deep.mat-pseudo-checkbox {
+    display: none !important;
+}
+
+::ng-deep.mdc-list-item.mdc-list-item--selected {
+    background-color: #00539B !important;
+}
+
+::ng-deep.mdc-list-item.mdc-list-item--selected> ::ng-deep.mdc-list-item__primary-text {
+    color: white !important;
+}
+
+::ng-deep.mat-mdc-option{
+    min-height: 25px !important;
+    margin: 2px !important;
+    border-radius: 3px;
+}
+

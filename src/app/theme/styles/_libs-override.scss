@@ -1,0 +1,18 @@
+//----------Google Maps---------------
+.map-container {
+  width: 100% !important;
+  height: calc(100vh - 144px) !important;
+}
+.contact-map .map-container {
+  height: 310px !important;
+}
+
+//----------ng-scrollbar---------------
+ng-scrollbar {
+  --scrollbar-size: 6px !important;
+  --scrollbar-thumb-color: rgba(204, 204, 204, 0.8) !important;
+  --scrollbar-thumb-hover-color: #ccc !important;
+  --scrollbar-border-radius: 4px !important;
+  --scrollbar-hover-size: 8px !important;
+  --scrollbar-padding: 2px !important;
+}

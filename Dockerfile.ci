@@ -1,0 +1,35 @@
+FROM node:18-slim as build
+
+# Install Google Chrome Stable and fonts
+# Note: this installs the necessary libs to make the browser work with Puppeteer/Karma.
+RUN apt-get update && apt-get install gnupg wget -y && \
+    wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
+    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
+    apt-get update && \
+    apt-get install google-chrome-stable -y --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY package*.json ./ 
+
+# Copy .npmrc file containing authentication tokens
+# COPY .npmrc ./
+
+# Install dependencies
+RUN npm install 
+
+COPY . .
+
+# RUN npm run test:ci
+
+# Build the Angular app
+RUN npm run build
+
+# symlink the mapped secret to the config file
+RUN rm -rf ./dist/assets/config/config.json
+RUN ln -s /config/config.json ./dist/assets/config/config.json
+
+FROM nginx:alpine-slim
+EXPOSE 8080
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist /usr/share/nginx/html  

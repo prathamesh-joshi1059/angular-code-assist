@@ -1,0 +1,79 @@
+<div class="mat-elevation-z6 calendar-content p-1">
+  <full-calendar
+    #calendar
+    [options]="calendarOptions"
+    (dateClick)="handleDateClick($event)"
+  >
+    <ng-template #eventContent let-arg>
+      <div
+        fxLayout="row wrap"
+        [ngClass]="{
+          'custom-event-container':
+            getDiferrence(arg.event.start, arg.event.end) <= 0,
+          'custom-event-multiDay':
+            getDiferrence(arg.event.start, arg.event.end) > 0
+        }"
+        [style.border-color]="arg.event.borderColor"
+        [style.background-color]="
+          arg.event.extendedProps['isPlaceholder']
+            ? arg.event.borderColor + '40'
+            : 'transparent'
+        "
+      >
+        <div class="event-header" fxLayout="row">
+          <div
+            class="initial"
+            [ngStyle]="{
+              'background-color': arg.event.extendedProps['isPlaceholder']
+                ? 'transparent'
+                : arg.event.borderColor,
+              'border-right': arg.event.extendedProps['isPlaceholder']
+                ? '1px solid #ffff'
+                : 'none',
+              color: arg.event.extendedProps['isPlaceholder']
+                ? '#344054'
+                : '#ffff',
+              'font-weight': 'bold'
+            }"
+          >
+            {{
+              arg.event.extendedProps.projectType?.substring(0, 1) | uppercase
+            }}
+          </div>
+          <div class="px-1" style="font-weight: 500">
+            {{ arg.event.title }}
+          </div>
+        </div>
+
+        @if(arg.view.type == 'dayGridWeek'){
+
+        <div
+          class="px-1 extra-details"
+          [style.border-top]="'1px solid ' + arg.event.borderColor"
+        >
+          <p>
+            <b>{{ arg.event.extendedProps.address }}</b>
+          </p>
+          <p>
+            <b>Tel: </b> <span>{{ arg.event.extendedProps.phone }}</span>
+          </p>
+          <p>
+            <b>Order: </b> <span>{{ arg.event.extendedProps.orderId }}</span>
+          </p>
+          <p>
+            <b>Fence Type: </b>
+            @for(fence of arg.event.extendedProps.fences; track fence){
+            <span>{{ fence.fenceType }}</span
+            >&nbsp;
+            <span>&#40;{{ fence.noOfUnits}}&#41;</span>
+            }
+          </p>
+          <p>
+            <b>Driver: </b> <span>{{ arg.event.extendedProps.driver }}</span>
+          </p>
+        </div>
+        }
+      </div>
+    </ng-template>
+  </full-calendar>
+</div>
