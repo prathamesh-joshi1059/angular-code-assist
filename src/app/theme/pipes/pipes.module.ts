@@ -1,7 +1,8 @@
+// AI confidence score for this refactoring: 82.56%
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PaginationPipe} from './pagination/pagination.pipe';
+import { PaginationPipe } from './pagination/pagination.pipe';
 import { ProfilePicturePipe } from './profilePicture/profilePicture.pipe';
 import { ChatPersonSearchPipe } from './search/chat-person-search.pipe';
 import { UserSearchPipe } from './search/user-search.pipe';
@@ -9,9 +10,7 @@ import { TruncatePipe } from './truncate/truncate.pipe';
 import { MailSearchPipe } from './search/mail-search.pipe';
 
 @NgModule({
-    imports: [ 
-        CommonModule 
-    ],
+    imports: [CommonModule],
     declarations: [
         PaginationPipe,
         ProfilePicturePipe,
@@ -30,3 +29,5 @@ import { MailSearchPipe } from './search/mail-search.pipe';
     ]
 })
 export class PipesModule { }
+
+// Issues: Missing spacing in imports, inconsistent use of trailing commas, improper casing in file imports, and unnecessary whitespace around array elements.

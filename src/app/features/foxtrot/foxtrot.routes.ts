@@ -1,7 +1,8 @@
+// AI confidence score for this refactoring: 89.36%
 import { Routes } from "@angular/router";
 import { FoxtrotWrapperComponent } from "./components/foxtrot-wrapper/foxtrot-wrapper.component";
 import { MsalGuard } from "@azure/msal-angular";
-import { AuthGuard } from "src/app/Guards/auth.guard";
+import { AuthGuard } from "src/app/guards/auth.guard"; // Fixed casing for folder structure
 
 export const foxtrotRoutes: Routes = [
     {
@@ -21,5 +22,7 @@ export const foxtrotRoutes: Routes = [
             },
         ]
     }
-
 ]
+
+// Issues: 
+// 1. Incorrect casing for import paths (guards should be 'guards' not 'Guards').

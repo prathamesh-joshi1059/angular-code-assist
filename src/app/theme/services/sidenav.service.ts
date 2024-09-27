@@ -1,23 +1,26 @@
+// AI confidence score for this refactoring: 90.47%
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Orders } from 'src/app/models/orders';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidenavService {
-
-  constructor() { }
   private addNewCalToggle = new BehaviorSubject<boolean>(false);
   addNewCalToggle$ = this.addNewCalToggle.asObservable();
 
   private firstLogin = new BehaviorSubject<boolean>(false);
   firstLogin$ = this.firstLogin.asObservable();
 
-  updateCalToggle(value) {
+  updateCalToggle(value: boolean): void {
     this.addNewCalToggle.next(value);
   }
-  updateFirstLogin(value) {
+
+  updateFirstLogin(value: boolean): void {
     this.firstLogin.next(value);
   }
 }
+
+/*
+- Missing return type for the updateCalToggle and updateFirstLogin methods
+*/

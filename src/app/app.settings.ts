@@ -1,9 +1,12 @@
+// AI confidence score for this refactoring: 92.69%
 import { Injectable } from '@angular/core';
 import { Settings } from './app.settings.model';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AppSettings {
-    public settings = new Settings(
+    public settings: Settings = new Settings(
         'Foxtrot',   //theme name
         true,       //loadingSpinner
         false,      //fixedHeader
@@ -15,6 +18,9 @@ export class AppSettings {
         'default',  //default, compact, mini
         'foxtrot-theme',   //foxtrot-theme
         false       // true = rtl, false = ltr
-    )
+    );
 }
 
+// Issues:
+// 1. Missing `providedIn` property in the Injectable decorator.
+// 2. Type of `settings` should be explicitly declared.

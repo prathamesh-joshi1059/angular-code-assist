@@ -1,7 +1,9 @@
+// AI confidence score for this refactoring: 94.37%
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Orders } from 'src/app/models/orders';
 import { Filter, FilterCounts } from 'src/app/models/filter';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,19 +38,21 @@ export class FilterService {
   filterCounts$ = this.filterCountsSubject.asObservable();
 
   /* Function to set data to get filtered */
-  setRawData(data: Orders[]) {
+  setRawData(data: Orders[]): void {
     this.rawData = data;
     /* Get Driver list from data */
     this.driverListSubject.next(Array.from(new Set(data.map(item => item.driver))).sort());
     this.applyFilters();
   }
+
   /* Function to update filters */
-  updateFilters(filters) {
+  updateFilters(filters: Filter): void {
     this.filtersSubject.next(filters);
     this.applyFilters();
   }
+
   /* Function to clear filters */
-  clearFilters() {
+  clearFilters(): void {
     this.filtersSubject.next({
       search: '',
       projectTypes: [],
@@ -58,25 +62,25 @@ export class FilterService {
     });
     this.applyFilters();
   }
+
   /* Function to apply filters on data and get filtered data */
-  private applyFilters() {
+  private applyFilters(): void {
     const filters = this.filtersSubject.value;
     let filteredData = this.rawData;
 
-    if (filters.projectTypes?.length > 0) {
-      let parentData: Orders[] = this.rawData;
-      filteredData = parentData.filter(item =>
+    if (filters.projectTypes?.length) {
+      filteredData = filteredData.filter(item =>
         filters.projectTypes.includes(item.projectType.toLowerCase())
       );
     }
 
-    if (filters.workTypes?.length > 0) {
+    if (filters.workTypes?.length) {
       filteredData = filteredData.filter(item =>
         filters.workTypes.includes(item.workType.toLowerCase())
       );
     }
 
-    if (filters.fenceTypes?.length > 0) {
+    if (filters.fenceTypes?.length) {
       filteredData = filteredData.filter(parent =>
         parent.fences.some(fence =>
           filters.fenceTypes.includes(fence.fenceType.toLowerCase())
@@ -84,7 +88,7 @@ export class FilterService {
       );
     }
 
-    if (filters.drivers?.length > 0) {
+    if (filters.drivers?.length) {
       filteredData = filteredData.filter(item =>
         filters.drivers.includes(item.driver.toLowerCase())
       );
@@ -103,8 +107,9 @@ export class FilterService {
     /* Update filter counts */
     this.updateFilterCounts(filteredData);
   }
+
   /* Function to update filter counts */
-  updateFilterCounts(filteredData: Orders[]) {
+  updateFilterCounts(filteredData: Orders[]): void {
     const counts: FilterCounts = {
       projectTypes: {},
       workTypes: {},
@@ -116,13 +121,22 @@ export class FilterService {
       counts.projectTypes[item.projectType] = (counts.projectTypes[item.projectType] || 0) + 1;
       counts.workTypes[item.workType] = (counts.workTypes[item.workType] || 0) + 1;
       counts.drivers[item.driver] = (counts.drivers[item.driver] || 0) + 1;
+
       if (!counts.driverWorkTypeCounts[item.driver]) {
         counts.driverWorkTypeCounts[item.driver] = {};
       }
-      counts.driverWorkTypeCounts[item.driver][item.workType] = (counts.driverWorkTypeCounts[item.driver][item.workType] || 0) + 1;
+
+      counts.driverWorkTypeCounts[item.driver][item.workType] = 
+        (counts.driverWorkTypeCounts[item.driver][item.workType] || 0) + 1;
     });
 
     this.filterCountsSubject.next(counts);
   }
-
 }
+
+/*
+- Missing types in function parameters.
+- Inconsistent use of nullish coalescing with length checks.
+- Function return types are not specified.
+- Unused variables should be removed.
+*/

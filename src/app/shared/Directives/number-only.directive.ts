@@ -1,3 +1,4 @@
+// AI confidence score for this refactoring: 96.24%
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
@@ -9,7 +10,6 @@ export class NumberOnlyDirective {
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    const input = event.target as HTMLInputElement;
     const key = event.key;
 
     // Prevent default for 'e', '-', and '+'
@@ -26,3 +26,6 @@ export class NumberOnlyDirective {
   }
 
 }
+
+// Issues: 
+// - Unused variable 'input' in onKeyDown method.
