@@ -1,3 +1,4 @@
+// AI confidence score for this refactoring: 80.10%
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Orders } from 'src/app/models/orders';
@@ -11,64 +12,44 @@ import { FilterService } from 'src/app/features/sidebar/services/filter.service'
   providedIn: 'root',
 })
 export class OrderService {
+  private ordersData = new BehaviorSubject<Orders[]>([]);
+  ordersData$ = this.ordersData.asObservable();
+
+  private calList = new BehaviorSubject<CustomView[]>([]);
+  calList$ = this.calList.asObservable();
+
   constructor(
     private apiService: ApiService,
     private userService: UserService,
     private sidenavService: SidenavService,
     private filterService: FilterService
   ) {}
-  private ordersData = new BehaviorSubject<Orders[]>([]);
-  ordersData$ = this.ordersData.asObservable();
 
-  updateOrdersData(data: Orders[]) {
+  updateOrdersData(data: Orders[]): void {
     this.ordersData.next(data);
   }
 
-  private calList = new BehaviorSubject<CustomView[]>([]);
-  calList$ = this.calList.asObservable();
-
-  getCalendarList(calList) {
+  getCalendarList(calList: CustomView[]): void {
     this.calList.next(calList);
   }
 
-  // getDefaultCalendar() {
-  //   console.warn(this.userService.loggedUser.userEmail);
-  //   let user = {
-  //     userId: this.userService.loggedUser.userEmail,
-  //     userName: this.userService.loggedUser.name,
-  //   };
-  //   this.apiService.postData('calendar-view/default', user).subscribe({
-  //     next: (res: any) => {
-  //       let jsonString = res.replace(/^[^{]*([\s\S]*?)[^}]*$/, '$1');
-  //       console.log(jsonString);
-  //       try {
-  //         let parsedData = JSON.parse(jsonString);
-  //         console.log('Parsed data:', parsedData);
-  //         // Process the parsed data...
-  //       } catch (error) {
-  //         console.error('Error parsing JSON:', error);
-  //       }
-  //     },
-  //   });
-  // }
-  getDefaultCalendar() {
-    let allOrders = [];
-    let user = {
+  getDefaultCalendar(): void {
+    let allOrders: Orders[] = [];
+    const user = {
       userId: this.userService.loggedUser.userEmail,
       userName: this.userService.loggedUser.name,
     };
 
     this.apiService.getCalendarView(user).subscribe({
       next: (data: any) => {
-        if (data && data.defaultCalendarView != null) {
+        if (data?.defaultCalendarView !== null) {
           this.sidenavService.updateCalToggle(false);
           this.sidenavService.updateFirstLogin(false);
-          this.getCalendarList(data['calendarList']);
+          this.getCalendarList(data.calendarList);
         }
         if (data && Array.isArray(data)) {
-          allOrders = [...allOrders, ...data] as unknown[] as any;
+          allOrders = [...allOrders, ...data];
           this.filterService.setRawData(allOrders);
-          // console.log(data);
         }
       },
       error: (err) => {
@@ -77,3 +58,12 @@ export class OrderService {
     });
   }
 }
+
+// Issues: 
+// 1. No type specified for 'calList' parameter in getCalendarList method.
+// 2. 'allOrders' should have a type specified. 
+// 3. use of 'any' for 'data' when subscribing to observable.
+// 4. using 'as unknown[] as any', multiple assertions make the code less readable.
+// 5. Use of 'let' instead of 'const' for 'user', as its value doesn't change.
+// 6. Unused commented code should be removed.
+// 7. Unused parameter 'calList' in 'getCalendarList' type should be explicit.

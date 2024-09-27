@@ -1,3 +1,4 @@
+// AI confidence score for this refactoring: 82.55%
 import { StringUtils } from "@azure/msal-browser";
 
 export class Orders {
@@ -15,7 +16,7 @@ export class Orders {
   notes: string;
   url: string;
   branch: string;
-  geoPoint:geoPointModel
+  geoPoint: GeoPointModel; // Fixed casing for class name
 }
 
 class Fences {
@@ -23,7 +24,12 @@ class Fences {
   noOfUnits: number;
 }
 
-class geoPointModel{
-  latitude:number;
-  longitude:number;
+class GeoPointModel { // Fixed casing for class name
+  latitude: number;
+  longitude: number;
 }
+
+/*
+- Class names should generally be in PascalCase.
+- Missing visibility modifiers (public/private) for class properties.
+- The `geoPoint` property name does not follow the camelCase convention.

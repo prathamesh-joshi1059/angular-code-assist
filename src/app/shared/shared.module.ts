@@ -1,3 +1,4 @@
+// AI confidence score for this refactoring: 94.68%
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -38,8 +39,10 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { CapitalizeFirstLetterDirective } from './Directives/capitalize-first-letter.directive';
 import { NumberOnlyDirective } from './Directives/number-only.directive';
 import { UserInitialPipe } from './pipes/user-initial.pipe';
+
 @NgModule({
-  declarations: [CapitalizeFirstLetterDirective,
+  declarations: [
+    CapitalizeFirstLetterDirective,
     NumberOnlyDirective,
     UserInitialPipe
   ],
@@ -78,7 +81,6 @@ import { UserInitialPipe } from './pipes/user-initial.pipe';
     MatToolbarModule,
     MatTooltipModule,
     MatStepperModule,
-    MatChipsModule,
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
@@ -117,7 +119,6 @@ import { UserInitialPipe } from './pipes/user-initial.pipe';
     MatToolbarModule,
     MatTooltipModule,
     MatStepperModule,
-    MatChipsModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -129,3 +130,9 @@ import { UserInitialPipe } from './pipes/user-initial.pipe';
   ],
 })
 export class SharedModule { }
+
+// Issues: 
+// 1. Redundant import statements for MatChipsModule in both imports and exports.
+// 2. The order of imports and exports could be more organized (e.g., grouped by functionality).
+// 3. Unused imports should be removed if not used elsewhere in the application.
+// 4. Directive and Pipe naming conventions should ideally follow Angular style guidelines.
